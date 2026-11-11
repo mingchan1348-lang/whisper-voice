@@ -8,7 +8,7 @@ import sounddevice as sd
 import rumps
 from faster_whisper import WhisperModel
 
-MODEL_SIZE = 'base'   # tiny/base/small/medium — base 係最佳平衡
+MODEL_SIZE = 'small'   # tiny/base/small/medium — base 係最佳平衡
 SAMPLE_RATE = 16000
 SIGNAL_FILE = '/tmp/whispervoice_record'
 MODEL_PATH = os.path.expanduser('~/.whispervoice_model')
@@ -60,7 +60,7 @@ class Recorder:
 # ── Transcribe ────────────────────────────────────────────────────────
 def transcribe(path):
     model = get_model()
-    segments, info = model.transcribe(path, beam_size=5)
+    segments, info = model.transcribe(path, beam_size=5, language_detection_threshold=0.5, language_detection_segments=3)
     text = ' '.join(s.text.strip() for s in segments)
     lang = info.language
     os.unlink(path)
