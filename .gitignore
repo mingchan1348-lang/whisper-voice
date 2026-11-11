@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+/tmp/
+*.log
+~/.whispervoice_model/
+*.wav
